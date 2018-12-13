@@ -664,6 +664,20 @@ class FileAnalysis(object):
             r.append([cp,cn])
         return r
 
+
+# Load the training data only once, as this takes a while
+t = TrainingData()
+t.read_corpus()
+p = FileAnalysis(t)
+
+
+def main_with_data(d):
+    global t, p
+
+    res, r2, r3 = p.deduce(d)
+    return res
+
+
 if __name__ == "__main__":
     fast, dump = False, False
     argv = sys.argv[1:]
